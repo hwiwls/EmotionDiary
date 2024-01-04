@@ -37,6 +37,11 @@ class ViewController: UIViewController {
     }
     
     func config() {
+        for i in 0..<countArr.count {
+            let savedCount = UserDefaults.standard.integer(forKey: "\(i)")
+            countArr[i] = savedCount
+        }
+        
         happyBtn.tag = 0
         loveBtn.tag = 1
         likeBtn.tag = 2
@@ -89,6 +94,8 @@ class ViewController: UIViewController {
     
     @IBAction func btnClicked(_ sender: UIButton) {
         countArr[sender.tag] += 1
+            
+        UserDefaults.standard.set(countArr[sender.tag], forKey: "\(sender.tag)")
         
         let buttons = [happyBtn, loveBtn, likeBtn, upsetBtn, distressedBtn, sleepyBtn, ridiculousBtn, sosoBtn, sadBtn]
             let titles = ["행복해", "사랑해", "좋아해", "짜증나", "속상해", "잠이와", "황당해", "쏘쏘야", "넘슬퍼"]
@@ -111,9 +118,6 @@ class ViewController: UIViewController {
                     button.configuration = configuration
                 }
             }
-        
-        
-        
     }
     
     
